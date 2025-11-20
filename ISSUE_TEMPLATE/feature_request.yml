@@ -1,0 +1,27 @@
+name: Feature request
+description: Suggest an enhancement or new capability
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for contributing ideas! Please describe the feature clearly.
+        Please keep it withing 8-10 hours of dev othewise label it `biggy` and split into smaller parts
+        And please include links to design if aplicable
+
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: What is this feature about?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the ideal implementation or behavior
+    validations:
+      required: false
+
