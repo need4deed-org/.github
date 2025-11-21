@@ -1,0 +1,11 @@
+---
+name: Test template
+description: Minimal template to test issue forms
+body:
+  - type: input
+    id: short
+    attributes:
+      label: Short summary
+      placeholder: "A one-line summary"
+    validations:
+      required: true
