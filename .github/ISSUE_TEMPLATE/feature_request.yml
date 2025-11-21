@@ -9,10 +9,10 @@ body:
         Please keep it withing 8-10 hours of dev othewise label it `biggy` and split into smaller parts
         And please include links to design if aplicable
 
-  - type: input
-    id: summary
+  - type: textarea
+    id: descrition
     attributes:
-      label: Summary
+      label: Descrition
       description: What is this feature about?
     validations:
       required: true
