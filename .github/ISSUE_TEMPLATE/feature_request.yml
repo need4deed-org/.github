@@ -10,9 +10,9 @@ body:
         And please include links to design if aplicable
 
   - type: textarea
-    id: descrition
+    id: description
     attributes:
-      label: Descrition
+      label: Description
       description: What is this feature about?
     validations:
       required: true
