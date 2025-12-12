@@ -1,4 +1,4 @@
-
+/docs/CONTRIBUTING.md
 # Contributing to Need4Deed
 
 We are lucky to have you! 🎉👍
