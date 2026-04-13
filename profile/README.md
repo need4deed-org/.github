@@ -43,9 +43,9 @@ git clone https://github.com/need4deed-org/sdk.git
 
 ```bash
 cd be
-npm install
+yarn install
 # Copy .env.example to .env and configure your DB
-npm start
+yarn start
 
 ```
 
@@ -53,10 +53,10 @@ npm start
 
 ```bash
 cd ../fe
-npm install
+yarn install
 # Link the local SDK for type safety
-npm install ../sdk
-npm run dev
+yarn install ../sdk
+yarn dev
 
 ```
 
