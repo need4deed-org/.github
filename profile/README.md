@@ -64,6 +64,9 @@ Visit `http://localhost:3000` to see the app in action.
 
 ---
 
+NEXT_PUBLIC_CLOUDFRONT_URL=https://d2nwrdddg8skub.cloudfront.net/images
+NEXT_PUBLIC_CLOUDFRONT_DATA_URL=https://d2nwrdddg8skub.cloudfront.net/data 
+
 ## 🤝 Contributing
 
 We love our contributors! Whether you are a senior dev or looking for your first open-source contribution, your code helps real people in Berlin.
