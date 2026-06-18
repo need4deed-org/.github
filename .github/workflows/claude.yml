@@ -1,0 +1,60 @@
+name: Sync CLAUDE shared rules
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.claude/shared-rules.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        repo: [be, fe, sdk]
+
+    steps:
+      - name: Mint installation token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ vars.SYNC_APP_ID }}
+          private-key: ${{ secrets.SYNC_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: ${{ matrix.repo }}
+
+
+      - name: Checkout source (.github repo)
+        uses: actions/checkout@v6
+
+      - name: Checkout target repo
+        uses: actions/checkout@v6
+        with:
+          repository: ${{ github.repository_owner }}/${{ matrix.repo }}
+          token: ${{ steps.app-token.outputs.token }}
+          path: target
+
+      - name: Copy shared rules into target
+        run: |
+          mkdir -p target/.claude
+          cp claude/shared-rules.md target/.claude/shared-rules.md
+
+      - name: Open PR in target repo
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          path: target
+          branch: chore/sync-claude-rules
+          delete-branch: true
+          commit-message: "chore: sync shared CLAUDE rules"
+          title: "Sync shared CLAUDE rules"
+          body: |
+            Automated sync of `claude/shared-rules.md` from the org `.github` repo.
+
+            Source commit: ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}
+          labels: automated
