@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - '.claude/shared-rules.md'
+      - ".claude/shared-rules.md"
   workflow_dispatch:
 
 permissions:
@@ -28,7 +28,6 @@ jobs:
           owner: ${{ github.repository_owner }}
           repositories: ${{ matrix.repo }}
 
-
       - name: Checkout source (.github repo)
         uses: actions/checkout@v6
 
@@ -42,7 +41,7 @@ jobs:
       - name: Copy shared rules into target
         run: |
           mkdir -p target/.claude
-          cp claude/shared-rules.md target/.claude/shared-rules.md
+          cp .claude/shared-rules.md target/.claude/shared-rules.md
 
       - name: Open PR in target repo
         uses: peter-evans/create-pull-request@v8
@@ -54,7 +53,7 @@ jobs:
           commit-message: "chore: sync shared CLAUDE rules"
           title: "Sync shared CLAUDE rules"
           body: |
-            Automated sync of `claude/shared-rules.md` from the org `.github` repo.
+            Automated sync of `.claude/shared-rules.md` from the org `.github` repo.
 
             Source commit: ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}
           labels: automated
