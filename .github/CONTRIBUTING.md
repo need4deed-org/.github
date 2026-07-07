@@ -1,4 +1,5 @@
 /.github/CONTRIBUTING.md
+
 # Contributing to Need4Deed
 
 We are lucky to have you! 🎉👍
@@ -118,25 +119,32 @@ parent/
 
 ### SDK Linking
 
-The **SDK** shares TypeScript types between the **frontend** and **be**.
-We don’t fetch it from npm — we use the **local sibling folder** approach instead.
+SDK is published on https://www.npmjs.com/package/need4deed-sdk
+make sure you're on the latest if you're working on API related issues:
 
-1. Make sure you have the latest branches checked out in each repo:
+```
+$ yarn upgrade need4deed-sdk --latest
+```
 
-   ```bash
-   cd sdk && git pull origin <branch>
-   cd ../fe && git pull origin <branch>
-   cd ../be && git pull origin <branch>
-   ```
+### API changes go through the SDK contract first
 
-2. In `fe` and `be`, upgrade SDK locally:
+The `sdk` is the single source of truth for the API contract. Any change to the API surface
+(endpoints, request/response shapes, types, error codes) **MUST** follow this order:
 
-   ```bash
-   yarn upgrade need4deed-sdk
-   ```
+1. Discuss and update id needed the contract in the `sdk` repo first.
+2. Publish the new SDK version to npm.
+3. Only then update `be` and `fe` to consume the change.
 
-3. Ensure that the **current branch name** is checked out in all three repos. `fe` and `be` default branches are `develop`, `sdk` default branch is `main`. You may use feature branches as well! In such a case
-   > 🔄 if you get TypeScript errors, make sure `sdk` and `be` or `fe` are aligned and freshly pulled.
+**IMPORTANT:** `be` and `fe` MUST depend on the SDK as published on **npmjs.com** — never on the
+local `sdk` checkout or a sibling folder. Do not use `file:../sdk`, `npm link`, workspace or
+`link:` references, or any other local linking for the SDK dependency. Pin to a version that is
+actually published. If the version you need isn't on npmjs.com yet, the work is **not ready** to
+land in `be`/`fe` — finish and publish the SDK first!!!
+
+Do not implement or "stub" an API change in `be` or `fe` ahead of the contract. If the contract is
+missing, wrong, or incomplete, fix it in `sdk` and publish — never work around it locally.
+
+Always make sure all API related issues are based on the latest dependency "need4deed-sdk". > 🔄 if you get TypeScript errors, make sure `sdk` and `be` or `fe` are aligned and freshly pulled.
 
 ---
 
