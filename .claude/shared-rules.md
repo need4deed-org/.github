@@ -60,6 +60,25 @@ Default to **no comments**. Name things so the code explains itself.
   PR description.
 - Don't copy the comment style of surrounding code; remove such comments when you touch it.
 
+## Domain names: one name per thing
+
+Each name below means exactly one thing in the UI, issues, PRs, code and database. Never use it
+for anything else, and use it in new issues and code. Where "Code today" differs, the rename is
+tracked in the "Clear names" epic; until it lands, map the old code name to the new name here.
+
+| Name | What it is | UI (en / de) | Code today |
+| --- | --- | --- | --- |
+| need4deed event | An event need4deed runs itself, managed in the Calendar, with sign-ups | Events / Veranstaltungen | `EventN4D`, table `event_n4d` |
+| opportunity:event | An NGO opportunity of type event: one date, one-off help | Event opportunity / Einsatz bei Veranstaltung | type value `events` (`ProfileVolunteeringType.EVENTS`) |
+| Activity | A kind of volunteering work, like a skill | Activities / Aktivitäten | `Activity`, table `activity` |
+| Time log | Volunteering hours logged per match | Time log / Zeiterfassung | `ActivityLog`, table `activity_log`, `/activity-log` |
+| Profile changes tracker | Who changed what on a volunteer or opportunity profile, and when | Profile changes / Profiländerungen | `VolunteerAuditLog` (be, sdk), `VolunteerActivityLog` (fe) |
+| Agent | An NGO's accommodation centre (Einrichtung) | NGOs / Einrichtungen | `Agent`, table `agent` |
+
+- Never call a profile change or a time log entry an "activity" or "activity log".
+- Never call an opportunity of type event a "need4deed event", or the reverse.
+- Write "AI agent" for AI tools; a bare "agent" is always the NGO.
+
 ## Cases for names
 
 - all TypeScript names are in camelCase
